@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+//"Debounce delays execution until the user stops triggering events,
+// while throttle limits execution to once per interval during continuous events."
+
 function useDebounce(value, delay) {
 
     const [debounceValue, setDebounceValue] = useState(value);
@@ -9,9 +12,7 @@ function useDebounce(value, delay) {
             setDebounceValue(value);
         }, delay);
 
-        return () => {
-            clearTimeOut(handler)
-        }
+        return () => clearTimeout(handler);
     }, [value, delay]);
     return debounceValue;
 }
